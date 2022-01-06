@@ -250,9 +250,9 @@
     
     <input type="number" name="tpl_seat_id" id="tpl_seat_id"  hidden  >
 
-    <input type="text" value="MR. X" name="name" id="ticketCartPassengerNameInput"    >
-    <input type="text" value="01" name="nid" id="ticketCartPassengerNidInput" >
-    <input type="text"  value="01"  name="phone" id="ticketCartPassengerPhoneInput"    >
+    <input type="text" value="MR. X" name="name" id="ticketCartPassengerNameInput"    hidden >
+    <input type="text" value="01" name="nid" id="ticketCartPassengerNidInput"  hidden>
+    <input type="text"  value="01"  name="phone" id="ticketCartPassengerPhoneInput"  hidden   >
 
 </form>
 

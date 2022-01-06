@@ -71,35 +71,57 @@
                     <h3 class="text-white"> Cart</h3>
                     <div class="card-body ">
 
+                        <div class="form-row align-items-center">
+                            <div class="col-12 col-md-12">
+                                <span class=" pl-2"> Name</span>
+                                <input type="text" class="form-control mb-2" value="{{ Auth::user()->name }}" id="ticketCartPassengerName" required>
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <span class=" pl-2">NID <span id="nidCheck"> </span> </span>
+                                <input type="number" class="form-control mb-2" value="{{ Auth::user()->nid }}" id="ticketCartPassengerNid" required>
+                            </div>
+
+
+
+                            <div class="col-12">
+
+                                <span class=" pl-2">phone <span id="phoneCheck"> </span> </span>
+                                <input type="text" class="form-control mb-2" value="{{ Auth::user()->phone }}" id="ticketCartPassengerPhone" required>
+                            </div>
+
+
+
+                        </div>
+
 
                         <div class="row" id="payment_system">
                             <div class="form-check col-4 p-4 ">
-                                <input class="form-check-input " type="radio" name="exampleRadios" id="account_type"
-                                    value="option1" checked>
+                                <input class="form-check-input " type="radio" name="exampleRadios" id="account_type" value="option1" checked>
                                 <label class="form-check-label" for="account_type">
                                     <img src="{{ asset('img/bkash.png') }}" alt="bkash" width="70px">
                                 </label>
                             </div>
 
                             <div class="form-check col-4 p-4">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="account_type"
-                                    value="option1" >
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="account_type" value="option1">
                                 <label class="form-check-label" for="account_type">
                                     <img src="{{ asset('img/rocket.jpg') }}" alt="bkash" width="70px">
                                 </label>
                             </div>
 
                             <div class="form-check col-4 p-4">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="account_type"
-                                    value="option1" >
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="account_type" value="option1">
                                 <label class="form-check-label" for="account_type">
                                     <img src="{{ asset('img/nogod.png') }}" alt="bkash" width="70px">
                                 </label>
                             </div>
                             <div class="form-check col-12 pb-4">
-                                
-                                
-                                <input class="form-control" type="tel" name="account_no" id="account_no" placeholder="Account No">
+
+                            <div id="accountCheck"> </div>
+                                <input class="form-control" type="tex" name="account_no" value="+8801" id="account_no" placeholder="Account No">
                             </div>
                         </div>
 
@@ -143,8 +165,9 @@
     <input type="number" name="bus_seat_id" id="cart_bus_seat_id" hidden>
     <input type="number" name="schedule_id" id="cart_schedule_id" value="{{ $schedule->id }}" hidden>
 
-    <input type="text" value="{{ Auth::user()->name }}" name="name" hidden>
-    <input type="text" value="{{ Auth::user()->phone }}" name="phone" hidden>
+    <input type="text" id="ticketCartPassengerNameInput" value="{{ Auth::user()->name }}" name="name" hidden>
+    <input type="text" id="ticketCartPassengerPhoneInput" value="{{ Auth::user()->phone }}" name="phone" hidden>
+    <input type="text" id="ticketCartPassengerNidInput" value="{{ Auth::user()->nid }}" name="nid" hidden>
     <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
 
 </form>
@@ -153,8 +176,7 @@
 
 
 <!-- Create new product -->
-<div class=" modal fade" id="create-ticket-reload-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label"
-    aria-hidden="true">
+<div class=" modal fade" id="create-ticket-reload-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -182,6 +204,9 @@
                                 <tr>
                                     <td> Passenger Phone :</td>
                                     <td id="passengerPhoneOnTicket">{{ Auth::user()->phone }}</td>
+                                </tr>  <tr>
+                                    <td> Passenger NID :</td>
+                                    <td id="passengerNidOnTicket">{{ Auth::user()->nid }}</td>
                                 </tr>
                                 <tr>
                                     <td> Schedule : </td>
@@ -193,7 +218,7 @@
                                 </tr>
                                 <tr>
                                     <td> To : </td>
-                                    <td id="toDestinationOnTicket">{{  $schedule->fromDestinations->name }} </td>
+                                    <td id="toDestinationOnTicket">{{ $schedule->fromDestinations->name }} </td>
                                 </tr>
                                 <tr>
                                     <td> Seats : </td>
@@ -221,7 +246,7 @@
 
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         var schedule;
         var cartArray = {};
@@ -231,7 +256,7 @@
             var html = "";
             var totalCost = 0;
             var cartArrayLenth = 0;
-            jQuery.each(cartArray, function (data) {
+            jQuery.each(cartArray, function(data) {
                 totalCost += ticketCost;
                 cartArrayLenth++;
 
@@ -290,7 +315,7 @@
 
         var link = home.trim() + "/bus/bus-schedule-seat?schedule_id=" + scheduleData.id;
 
-        $.get(link, function (data, status) {
+        $.get(link, function(data, status) {
 
             console.log(data);
             var html = "";
@@ -370,7 +395,7 @@
 
 
 
-        $("body").on("click", ".seat", function () {
+        $("body").on("click", ".seat", function() {
 
             var id = $(this).attr('id');
             var schedule_id = $(this).attr('schedule_id');
@@ -386,7 +411,7 @@
         });
 
 
-        $("body").on("click", "#delete-cart-seat", function () {
+        $("body").on("click", "#delete-cart-seat", function() {
 
             var id = $(this).attr('data-id');
 
@@ -395,49 +420,130 @@
         });
 
 
+        $("#ticketCartPassengerName").change(function() {
+
+            $("#ticketCartPassengerNameInput").val($("#ticketCartPassengerName").val());
+            $("#passengerNameOnTicket").text($("#ticketCartPassengerName").val());
 
 
-        $("body").on("click", "#submit-cart-seat", function () {
+        });
+
+
+        $("#ticketCartPassengerNid").keyup(function() {
+
+            var VAL = this.value;
+
+            var result = (/^[0-9]{10,17}$/.test(VAL));
+
+            if (result) {
+
+                $("#nidCheck").html('<span class="text-success">  Done </span>')
+            } else {
+                console.log("not matched");
+                console.log(VAL);
+                $("#nidCheck").html('<span class="text-danger"> Invalid nid number </span>')
+                console.log("-------");
+            }
+
+
+
+
+            $("#ticketCartPassengerNidInput").val($("#ticketCartPassengerNid").val());
+            $("#passengerNidOnTicket").text($("#ticketCartPassengerNid").val());
+
+
+        });
+
+        $("#ticketCartPassengerPhone").keyup(function() {
+            console.log(VAL);
+            console.log("-------");
+            var VAL = this.value;
+
+            var result = (/^(?:\+88|88)?(01[3-9]\d{8})$/.test(VAL));
+
+            if (result) {
+
+                $("#phoneCheck").html('<span class="text-success">  Done </span>')
+            } else {
+                console.log("not matched");
+                console.log(VAL);
+                $("#phoneCheck").html('<span class="text-danger"> Invalid phone number </span>')
+                console.log("-------");
+            }
+
+
+            $("#ticketCartPassengerPhoneInput").val($("#ticketCartPassengerPhone").val());
+
+
+        });
+        $("#account_no").keyup(function() {
+            console.log(VAL);
+            console.log("-------");
+            var VAL = this.value;
+
+            var result = (/^(?:\+88|88)?(01[3-9]\d{8,9})$/.test(VAL));
+
+            if (result) {
+
+                $("#accountCheck").html('<span class="text-success">  Done </span>')
+            } else {
+                console.log("not matched");
+                console.log(VAL);
+                $("#accountCheck").html('<span class="text-danger"> Invalid Payment number </span>')
+                console.log("-------");
+            }
+
+            $("#passengerPhoneOnTicket").val($("#ticketCartPassengerPhone").val());
+
+
+        });
+
+
+
+
+
+        $("body").on("click", "#submit-cart-seat", function() {
             var account = $('#account_no').val();
             console.log(account);
             var len = account.length;
-            if(len >= 11){
 
-            
 
-            var ticketLists = '';
-            jQuery.each(cartArray, function (i) {
-                ticketLists += cartArray[i].name + ','
-                $('#cart_bus_seat_id').val(cartArray[i].bus_set_id);
-                $('#cart_schedule_id').val(cartArray[i].schedule_id);
+            if (len >= 11) {
 
 
 
+                var ticketLists = '';
+                jQuery.each(cartArray, function(i) {
+                    ticketLists += cartArray[i].name + ','
+                    $('#cart_bus_seat_id').val(cartArray[i].bus_set_id);
+                    $('#cart_schedule_id').val(cartArray[i].schedule_id);
 
-                var OPfrm = $('#ticketSubmitForm');
-                var act = OPfrm.attr('action');
-                $.ajax({
-                    type: OPfrm.attr('method'),
-                    url: act,
-                    data: OPfrm.serialize(),
-                    success: function (successData) {
 
-                        console.log(successData);
-                    },
-                    error: function (data) {
-                        console.log("can not add ticket ");
-                        console.log(data);
-                    },
+
+
+                    var OPfrm = $('#ticketSubmitForm');
+                    var act = OPfrm.attr('action');
+                    $.ajax({
+                        type: OPfrm.attr('method'),
+                        url: act,
+                        data: OPfrm.serialize(),
+                        success: function(successData) {
+
+                            console.log(successData);
+                        },
+                        error: function(data) {
+                            console.log("can not add ticket ");
+                            console.log(data);
+                        },
+                    });
+
+
                 });
 
 
-            });
-
-
-            $('#SeatsOnTicket').text(ticketLists);
-            $("#create-ticket-reload-modal").modal();
-            }
-            else{
+                $('#SeatsOnTicket').text(ticketLists);
+                $("#create-ticket-reload-modal").modal();
+            } else {
                 alert('Enter Valid Payment Account');
             }
         });
@@ -456,7 +562,6 @@
 
 
     });
-
 </script>
 
 
