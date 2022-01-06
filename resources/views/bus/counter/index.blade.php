@@ -32,6 +32,11 @@
                                 </div>
                                 <div class="col-auto">
 
+                                    <span class=" pl-2">NID</span>
+                                    <input type="text" class="form-control mb-2" id="ticketCartPassengerNid" required>
+                                </div>
+                                <div class="col-auto">
+
                                     <span class=" pl-2">phone</span>
                                     <input type="text" class="form-control mb-2" id="ticketCartPassengerPhone" required>
                                 </div>

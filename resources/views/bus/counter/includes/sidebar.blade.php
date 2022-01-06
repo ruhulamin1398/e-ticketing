@@ -18,12 +18,13 @@
 
     <hr class="sidebar-divider m-1 p-0 ">
 
-
+{{--
     <li class="nav-item  ">
        <a class="nav-link p-3 " href="{{ route("bus.busCounterTickets") }}">
            <i class="fas fa-fw fa-tachometer-alt"></i>
            <span>All Tickets</span></a>
    </li> 
+   --}}
 
   
     
