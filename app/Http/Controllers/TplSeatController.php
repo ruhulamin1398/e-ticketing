@@ -44,11 +44,15 @@ class TplSeatController extends Controller
      */
     public function store(Request $request)
     {
+        return "sdfdasf";
+
         $tplSeat = new tplSeat;
         $tplSeat->tpl_id = $request->tpl_id;
         $tplSeat->seat_type = $request->seat_type;
         $tplSeat->total_seat = $request->total_seat;
         $tplSeat->cost = $request->cost;
+        
+        $tplSeat->customer_nid  = $request->nid;
         $tplSeat->save();
         return $tplSeat;
     }

@@ -538,29 +538,26 @@
                 console.log(VAL);
                 $("#nidCheck").html('<span class="text-danger"> Invalid nid number </span>')
                 console.log("-------");
-                
-            return 0;
+
+                return 0;
             }
-
-
-
 
             var VAL = $("#ticketCartPassengerPhone").val();
 
-var result = (/^(?:\+88|88)?(01[3-9]\d{8})$/.test(VAL));
+            var result = (/^(?:\+88|88)?(01[3-9]\d{8})$/.test(VAL));
 
-if (result) {
+            if (result) {
 
-    $("#phoneCheck").html('<span class="text-success">  Done </span>')
-} else {
-    console.log("not matched");
-    console.log(VAL);
-    $("#phoneCheck").html('<span class="text-danger"> Invalid phone number </span>')
-    console.log("-------");
-    
-    return 0;
-}
-        
+                $("#phoneCheck").html('<span class="text-success">  Done </span>')
+            } else {
+                console.log("not matched");
+                console.log(VAL);
+                $("#phoneCheck").html('<span class="text-danger"> Invalid phone number </span>')
+                console.log("-------");
+
+                return 0;
+            }
+
 
 
 
