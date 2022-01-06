@@ -26,14 +26,24 @@
                         <form>
                             @csrf
                             <div class="form-row align-items-center">
-                                <div class="col-6 col-md-6">
+                                <div class="col-12 col-md-12">
                                     <span class=" pl-2"> Name</span>
                                     <input type="text" class="form-control mb-2" id="ticketCartPassengerName" required>
                                 </div>
-                                <div class="col-12 col-md-6">
 
-                                    <span class=" pl-2">phone</span>
-                                    <input type="text" class="form-control mb-2" id="ticketCartPassengerPhone" required>
+                                
+                                <div class="col-12">
+
+                                    <span class=" pl-2">NID <span id="nidCheck"> </span> </span>
+                                    <input type="number" class="form-control mb-2" id="ticketCartPassengerNid" required>
+                                </div>
+
+
+                                
+                                <div class="col-12">
+
+                                    <span class=" pl-2">phone <span id="phoneCheck"> </span> </span>
+                                    <input type="text" value="+8801" class="form-control mb-2" id="ticketCartPassengerPhone" required>
                                 </div>
 
 
@@ -240,8 +250,9 @@
     
     <input type="number" name="tpl_seat_id" id="tpl_seat_id"  hidden  >
 
-    <input type="text" value="MR. X" name="name" id="ticketCartPassengerNameInput"  hidden  >
-    <input type="text"  value="01"  name="phone" id="ticketCartPassengerPhoneInput"  hidden  >
+    <input type="text" value="MR. X" name="name" id="ticketCartPassengerNameInput"    hidden >
+    <input type="text" value="01" name="nid" id="ticketCartPassengerNidInput"  hidden>
+    <input type="text"  value="01"  name="phone" id="ticketCartPassengerPhoneInput"  hidden   >
 
 </form>
 
@@ -280,6 +291,14 @@
                                     <td> Passenger Phone : </td>
                                     <td id="passengerPhoneOnTicket"></td>
                                 </tr>
+
+                                
+                                <tr>
+                                    <td> Passenger NID : </td>
+                                    <td id="passengerNidOnTicket"> </td>
+                                </tr>
+
+
                                 <tr>
                                     <td> Schedule : </td>
                                     <td id="scheduleOnTicket"></td>
@@ -335,9 +354,12 @@ $(document).on('click','#ticketSubmitBtn',function(){
             url: action,
             data: data,
             success: function (successData) {
+                
+            console.log(successData);
                 $('#companyOnTicket').text(successData.company_name);
                 $('#passengerNameOnTicket').text(successData.customer_name);
                 $('#passengerPhoneOnTicket').text(successData.customer_phone);
+                $('#passengerNidOnTicket').text(successData.customer_nid);
                 $('#scheduleOnTicket').text(successData.schedule);
                 $('#fromDestinationOnTicket').text(successData.from_destination);
                 $('#toDestinationOnTicket').text(successData.to_destination);
@@ -367,13 +389,59 @@ $("#ticketCartPassengerName").change(function () {
 
 });
 
-$("#ticketCartPassengerPhone").change(function () {
 
-    $("#ticketCartPassengerPhoneInput").val($("#ticketCartPassengerPhone").val());
+
+
+$("#ticketCartPassengerPhone").keyup(function() {
+            console.log(VAL);
+            console.log("-------");
+            var VAL = this.value;
+
+            var result = (/^(?:\+88|88)?(01[3-9]\d{8})$/.test(VAL));
+
+            if (result) {
+
+                $("#phoneCheck").html('<span class="text-success">  Done </span>')
+            } else {
+                console.log("not matched");
+                console.log(VAL);
+                $("#phoneCheck").html('<span class="text-danger"> Invalid phone number </span>')
+                console.log("-------");
+            }
+
+
+            $("#ticketCartPassengerPhoneInput").val($("#ticketCartPassengerPhone").val());
+            $("#passengerPhoneOnTicket").text($("#ticketCartPassengerPhone").val());
+
+
+        });
+
+
+
+$("#ticketCartPassengerNid").keyup(function() {
+
+var VAL = this.value;
+
+var result = (/^[0-9]{1,17}$/.test(VAL));
+
+if (result) {
+
+    $("#nidCheck").html('<span class="text-success">  Done </span>')
+} else {
+    console.log("not matched");
+    console.log(VAL);
+    $("#nidCheck").html('<span class="text-danger"> Invalid nid number </span>')
+    console.log("-------");
+}
+
+
+
+
+$("#ticketCartPassengerNidInput").val($("#ticketCartPassengerNid").val());
+$("#passengerNidOnTicket").text($("#ticketCartPassengerNid").val());
+
 
 });
-
-
 
 
 

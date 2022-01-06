@@ -21,6 +21,7 @@ class CreateTplScheduleSeatsTable extends Migration
 
             $table->string('customer_name')->nullable();
             $table->string('customer_phone')->nullable();
+            $table->string('customer_nid')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->integer('status_id');
 
