@@ -23,6 +23,31 @@
                     <h3 class="text-white"> Cart</h3>
                     <div class="card-body ">
 
+                    <div class="form-row align-items-center">
+                            <div class="col-12 col-md-12">
+                                <span class=" pl-2"> Name</span>
+                                <input type="text" class="form-control mb-2" value="{{ Auth::user()->name }}" id="ticketCartPassengerName" required>
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <span class=" pl-2">NID <span id="nidCheck"> </span> </span>
+                                <input type="number" class="form-control mb-2" value="{{ Auth::user()->nid }}" id="ticketCartPassengerNid" required>
+                            </div>
+
+
+
+                            <div class="col-12">
+
+                                <span class=" pl-2">phone <span id="phoneCheck"> </span> </span>
+                                <input type="text" class="form-control mb-2" value="{{ Auth::user()->phone }}" id="ticketCartPassengerPhone" required>
+                            </div>
+
+
+
+                        </div>
+
 
 
 
@@ -55,9 +80,12 @@
                             </div>
                             <div class="form-check col-12 pb-4">
                                 
-                                
-                                <input class="form-control" type="tel" name="account_no" id="account_no" placeholder="Account No">
-                            </div>
+                            
+                            <div id="accountCheck"> </div>
+                                <input class="form-control" type="tex" name="account_no" value="+8801" id="account_no" placeholder="Account No">
+                         
+                        
+                        </div>
                         </div>
 
 
@@ -197,8 +225,12 @@
     
     <input type="number" name="tpl_seat_id" id="tpl_seat_id"  hidden  >
 
-    <input type="text" value="{{ Auth::user()->name }}" name="name" id="ticketCartPassengerNameInput"  hidden  >
-    <input type="text"  value="{{ Auth::user()->phone }}"  name="phone" id="ticketCartPassengerPhoneInput"  hidden  >
+    
+    <input type="text" id="ticketCartPassengerNameInput" value="{{ Auth::user()->name }}" name="name"  hidden >
+    <input type="text" id="ticketCartPassengerPhoneInput" value="{{ Auth::user()->phone }}" name="phone"  hidden >
+    <input type="text" id="ticketCartPassengerNidInput" value="{{ Auth::user()->nid }}" name="nid" hidden  >
+
+
     <input type="text"  value="{{ Auth::user()->id }}"  name="user_id"   hidden  >
 
 </form>
@@ -370,6 +402,76 @@ $(document).on('input','#total_ticket_number',function(){
 });
 
 
+
+
+$("#ticketCartPassengerNid").keyup(function() {
+
+var VAL = this.value;
+
+var result = (/^[0-9]{10,17}$/.test(VAL));
+
+if (result) {
+
+    $("#nidCheck").html('<span class="text-success">  Done </span>')
+} else {
+    console.log("not matched");
+    console.log(VAL);
+    $("#nidCheck").html('<span class="text-danger"> Invalid nid number </span>')
+    console.log("-------");
+}
+
+
+
+
+$("#ticketCartPassengerNidInput").val($("#ticketCartPassengerNid").val());
+$("#passengerNidOnTicket").text($("#ticketCartPassengerNid").val());
+
+
+});
+
+$("#ticketCartPassengerPhone").keyup(function() {
+console.log(VAL);
+console.log("-------");
+var VAL = this.value;
+
+var result = (/^(?:\+88|88)?(01[3-9]\d{8})$/.test(VAL));
+
+if (result) {
+
+    $("#phoneCheck").html('<span class="text-success">  Done </span>')
+} else {
+    console.log("not matched");
+    console.log(VAL);
+    $("#phoneCheck").html('<span class="text-danger"> Invalid phone number </span>')
+    console.log("-------");
+}
+
+
+$("#ticketCartPassengerPhoneInput").val($("#ticketCartPassengerPhone").val());
+
+
+});
+$("#account_no").keyup(function() {
+console.log(VAL);
+console.log("-------");
+var VAL = this.value;
+
+var result = (/^(?:\+88|88)?(01[3-9]\d{8,9})$/.test(VAL));
+
+if (result) {
+
+    $("#accountCheck").html('<span class="text-success">  Done </span>')
+} else {
+    console.log("not matched");
+    console.log(VAL);
+    $("#accountCheck").html('<span class="text-danger"> Invalid Payment number </span>')
+    console.log("-------");
+}
+
+$("#passengerPhoneOnTicket").val($("#ticketCartPassengerPhone").val());
+
+
+});
 
 
 
