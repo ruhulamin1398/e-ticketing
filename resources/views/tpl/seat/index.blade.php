@@ -270,6 +270,7 @@
 
                 var data = $('#newSeatForm').serialize();
                 var urlLink = $('#newSeatForm').attr('action');
+                console.log(data)
 
 
                 $.ajax({
