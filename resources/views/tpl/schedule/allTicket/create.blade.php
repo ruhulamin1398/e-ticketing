@@ -42,7 +42,7 @@
                                 
                                 <div class="col-12">
 
-                                    <span class=" pl-2">phone <span id="phoneCheck"> </span> </span>
+                                    <span class=" pl-2">Phone <span id="phoneCheck"> </span> </span>
                                     <input type="text" value="+8801" class="form-control mb-2" id="ticketCartPassengerPhone" required>
                                 </div>
 
@@ -201,7 +201,7 @@
                             <thead>
                                 <tr>
                                     <th>Type</th>
-                                    <th>price</th>
+                                    <th>Price</th>
                                     <th>Availability</th>
                                 </tr>
                             </thead>

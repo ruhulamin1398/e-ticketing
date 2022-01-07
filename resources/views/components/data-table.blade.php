@@ -47,7 +47,7 @@
 
         <div class="card-header py-3  bg-dark-color ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">  Add new</a>
+                <a class="navbar-brand text-light">  Add New</a>
             </nav>
         </div>
         <div class="card-body">

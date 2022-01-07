@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('company_id')->nullable();
-            $table->unsignedBigInteger('counter_id')->nullable();
+            $table->unsignedBigInteger('counter_id')->default(1);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

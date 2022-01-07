@@ -14,7 +14,7 @@
             <div class=" mb-4  text-center  bg-dark-color p-2  ">
                 <div class="card border-none   bg-dark-color    p-2 ">
 
-                    <h3 class="text-white"> Passenger information</h3>
+                    <h3 class="text-white"> Passenger Information</h3>
 
                     <div class="card-body ">
 
@@ -35,7 +35,7 @@
 
                                 <div class="col-12">
 
-                                    <span class=" pl-2">phone <span id="phoneCheck"> </span> </span>
+                                    <span class=" pl-2">Phone <span id="phoneCheck"> </span> </span>
                                     <input type="text" value="+8801" class="form-control mb-2" id="ticketCartPassengerPhone" required>
                                 </div>
 
@@ -154,7 +154,7 @@
                         <table class="table   table-striped  " width="100%">
                             <thead class=" text-light ">
                                 <th>Seats</th>
-                                <th>price</th>
+                                <th>Price</th>
                                 <th>Action</th>
                             </thead>
                             <tbody class="text-light" id='cartBody'>
