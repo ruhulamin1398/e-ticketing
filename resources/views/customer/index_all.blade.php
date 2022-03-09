@@ -42,24 +42,17 @@
 
                         <div class="col-12 p-2"  >
                            
-                            <label for="to_destination_id">Date of Journey</label>
+                            <label for="to_destination_id">Date of Journey  </label>
 
-                            <input type="date" class="form-control form-control" name="date" id="date" required >
+                            <input type="date" class="form-control form-control" name="date" id="date" value="{{today()->format('Y-m-d')}}" required >
                               
                         </div>
                         <input type="text" name="company_type_id" id="company_type_id" value="1" hidden >
                         <div class="col-3 p-2" >
-                                <button class=" btn btn-success btn-lg btn-block p-2 " id="SubmitBtn" type="button" onclick="setCompanyType(1)"  >Bus</button >
+                                <button class=" btn btn-success btn-lg btn-block p-2 " id="SubmitBtn" type="button" onclick="setCompanyType(1)"  >Search</button >
                         </div>  
-                        <div class="col-3 p-2" >
-                                <button class=" btn btn-success btn-lg btn-block p-2 " id="SubmitBtn" type="button" onclick="setCompanyType(2)"  >Train</button >
-                        </div> 
-                         <div class="col-3 p-2" >
-                                <button class=" btn btn-success btn-lg btn-block p-2 " id="SubmitBtn" type="button" onclick="setCompanyType(4)"  >AirPlane</button >
-                        </div> 
-                         <div class="col-3 p-2" >
-                                <button class=" btn btn-success btn-lg btn-block p-2 " id="SubmitBtn" type="button" onclick="setCompanyType(3)"  >Launch</button >
-                        </div>
+                        
+                        
                       
 
 

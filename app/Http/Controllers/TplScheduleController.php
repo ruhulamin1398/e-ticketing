@@ -73,6 +73,10 @@ class TplScheduleController extends Controller
         $company_type_id = $company->company_type_id;
         $schedule->company_type_id = $company_type_id;
         $schedule->from_destination_id = $destination_id;
+
+        $tpl = tpl::find($schedule->tpl_id);
+       
+        $schedule->cost = $request->cost;
         $schedule->save();
 
 

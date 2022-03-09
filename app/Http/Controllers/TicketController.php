@@ -105,6 +105,9 @@ class TicketController extends Controller
     }
     public function search(Request $request)
     {
+        
+        $time_start = $request->date . ' 00:00:00';
+        $time_end = $request->date . ' 23:59:59';
 
         $company_type_id = $request->company_type_id;
 
@@ -113,28 +116,56 @@ class TicketController extends Controller
 
 
         $to_destination_id = $request->to_destination_id;
-        if ($company_type_id == "1") {
-            $time_start = $request->date . ' 00:00:00';
-            $time_end = $request->date . ' 23:59:59';
-            $bus_schedules  = busSchedule::where('from_destination_id', $request->from_destination_id)->where('to_destination_id', $to_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->get();
+        // if ($company_type_id == "1") {
+        //     $time_start = $request->date . ' 00:00:00';
+        //     $time_end = $request->date . ' 23:59:59';
+        //     $bus_schedules  = busSchedule::where('from_destination_id', $request->from_destination_id)->where('to_destination_id', $to_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->get();
 
-            foreach($bus_schedules as $schedule){
+        //     foreach($bus_schedules as $schedule){
+        //          $schedule->available = $schedule->seats->where('status_id',1)->count();
+        //     }
+
+        //     return view('customer.search.bus', compact('company_type_id', 'bus_schedules','company_type_name'));
+        // }
+
+
+                                         // for bus 
+            $bus_schedules  = busSchedule::where('from_destination_id', $request->from_destination_id)->where('to_destination_id', $to_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->orderBy('cost')->get();
+
+            foreach($bus_schedules  as $schedule){
                  $schedule->available = $schedule->seats->where('status_id',1)->count();
             }
 
-            return view('customer.search.bus', compact('company_type_id', 'bus_schedules','company_type_name'));
-        }
-        elseif ($company_type_id == "2" || $company_type_id == "3" || $company_type_id == "4") {
-            $time_start = $request->date . ' 00:00:00';
-            $time_end = $request->date . ' 23:59:59';
+            // return view('customer.search.bus', compact('company_type_id', 'bus_schedules','company_type_name'));
+       
+
+
+        // elseif ($company_type_id == "2" || $company_type_id == "3" || $company_type_id == "4") {
+        //     $time_start = $request->date . ' 00:00:00';
+        //     $time_end = $request->date . ' 23:59:59';
            
-            $tpl_schedules = tplSchedule::where('company_type_id',$company_type_id)->where('from_destination_id', $request->from_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->get();
+        //     $tpl_schedules = tplSchedule::where('company_type_id',$company_type_id)->where('from_destination_id', $request->from_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->get();
    
-            return view('customer.search.tpl',compact('tpl_schedules','company_type_id','to_destination_id','company_type_name'));
-        }
-        else{
-            return abort(404);
-        }
+        //     return view('customer.search.tpl',compact('tpl_schedules','company_type_id','to_destination_id','company_type_name'));
+        // }
+
+
+     
+           
+            $train_schedules = tplSchedule::where('company_type_id',2)->where('from_destination_id', $request->from_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->orderBy('cost')->get();
+            $launch_schedules = tplSchedule::where('company_type_id',3)->where('from_destination_id', $request->from_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->orderBy('cost')->get();
+            $plane_schedules = tplSchedule::where('company_type_id',4)->where('from_destination_id', $request->from_destination_id)->where('schedule', '<=', $time_end)->where('schedule', '>=', $time_start)->orderBy('cost')->get();
+
+// return compact('bus_schedules','train_schedules','launch_schedules','plane_schedules','company_type_id','to_destination_id','company_type_name');
+ 
+
+return view('customer.search.ticket',compact('bus_schedules','train_schedules','launch_schedules','plane_schedules','company_type_id','to_destination_id','company_type_name'));
+    
+      
+
+
+
+       
     }
     public function bookTicket(Request $request)
     {

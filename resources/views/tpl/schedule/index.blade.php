@@ -33,7 +33,15 @@
         html2 +=           '<input type="datetime-local" name="schedule" class="form-control " id="schedule" required>';
         html2 +=       ' </div>';
 
-        $("#createFormFieldList").append(html2);
+        $("#createFormFieldList").append(html2);  
+        
+        var html3 = ''; 
+        html3 += '<div class="form-group col-sm-12 col-md-4   pl-4 pr-4">';
+        html3 += '<label for="cost"> Cost</label>';
+        html3 +=           '<input type="number" name="cost" class="form-control " id="schedule" required>';
+        html3 +=       ' </div>';
+
+        $("#createFormFieldList").append(html3);
 
 
     });
